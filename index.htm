@@ -111,11 +111,9 @@ tailwind.config = {
   overflow: hidden;
   transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.accordion-item:focus-within .accordion-content,
 .accordion-item.active .accordion-content {
   max-height: 2000px;
 }
-.accordion-item:focus-within .chevron-icon,
 .accordion-item.active .chevron-icon {
   transform: rotate(180deg);
 }
@@ -150,6 +148,9 @@ body {
 .group:hover .hero-img {
   transform: scale(1.03);
 }
+.min-h-accordion {
+  min-height: 68px;
+}
 </style>
 </head>
 <body class="bg-background font-body-md text-on-background antialiased">
@@ -162,21 +163,21 @@ body {
 </div>
 <nav class="hidden md:flex gap-8">
 <a class="nav-link text-slate-500 font-medium hover:text-slate-900" href="#hero">Home</a>
-<a class="nav-link text-slate-500 font-medium hover:text-slate-900" href="#medicine">Medicine</a>
+<a class="nav-link text-slate-500 font-medium hover:text-slate-900" href="#contacts">Emergency Services</a>
+<a class="nav-link text-slate-500 font-medium hover:text-slate-900" href="#medicine">Medical Guides</a>
 <a class="nav-link text-slate-500 font-medium hover:text-slate-900" href="#firstaid">First Aid</a>
-<a class="nav-link text-slate-500 font-medium hover:text-slate-900" href="#scenarios">Scenarios</a>
 <a class="nav-link text-slate-500 font-medium hover:text-slate-900" href="#about">About</a>
 </nav>
-<button class="bg-[#D32F2F] text-white px-4 md:px-6 py-2 rounded-lg font-bold hover:bg-red-700 active:scale-95 transition-all flex items-center gap-2 text-sm">
+<button id="sos-btn" class="bg-[#D32F2F] text-white px-4 md:px-6 py-2 rounded-lg font-bold hover:bg-red-700 active:scale-95 transition-all flex items-center gap-2 text-sm cursor-pointer">
 <span class="material-symbols-outlined text-sm">notifications_active</span>
 SOS
 </button>
 </div>
 <div id="mobile-nav" class="hidden md:hidden px-4 pb-4 flex flex-wrap gap-3">
 <a class="nav-link text-slate-500 font-medium text-sm" href="#hero">Home</a>
-<a class="nav-link text-slate-500 font-medium text-sm" href="#medicine">Medicine</a>
+<a class="nav-link text-slate-500 font-medium text-sm" href="#contacts">Emergency Services</a>
+<a class="nav-link text-slate-500 font-medium text-sm" href="#medicine">Medical Guides</a>
 <a class="nav-link text-slate-500 font-medium text-sm" href="#firstaid">First Aid</a>
-<a class="nav-link text-slate-500 font-medium text-sm" href="#scenarios">Scenarios</a>
 <a class="nav-link text-slate-500 font-medium text-sm" href="#about">About</a>
 </div>
 </header>
@@ -199,11 +200,11 @@ System Ready: Priority Zero
 Rapid access to clinical guidance, emergency contacts, and life-saving protocols. Designed for speed when every second dictates the outcome.
 </p>
 <div class="flex flex-col sm:flex-row gap-4 pt-4">
-<button class="flex-1 bg-green-600 text-white p-4 rounded-xl font-bold flex items-center justify-center gap-3 shadow-lg shadow-green-100 hover:bg-green-700 transition-all active:scale-[0.98]">
+<button id="whatsapp-btn" class="flex-1 bg-green-600 text-white p-4 rounded-xl font-bold flex items-center justify-center gap-3 shadow-lg shadow-green-100 hover:bg-green-700 transition-all active:scale-[0.98] cursor-pointer">
 <span class="material-symbols-outlined">chat</span>
 WhatsApp Alert
 </button>
-<button class="flex-1 bg-slate-900 text-white p-4 rounded-xl font-bold flex items-center justify-center gap-3 shadow-lg shadow-slate-200 hover:bg-slate-800 transition-all active:scale-[0.98]">
+<button id="location-btn" class="flex-1 bg-slate-900 text-white p-4 rounded-xl font-bold flex items-center justify-center gap-3 shadow-lg shadow-slate-200 hover:bg-slate-800 transition-all active:scale-[0.98] cursor-pointer">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">my_location</span>
 Send Location
 </button>
@@ -276,13 +277,13 @@ Send Location
 <section class="mb-20" id="medicine">
 <div class="flex items-center gap-3 mb-8">
 <span class="material-symbols-outlined text-[#D32F2F] text-3xl">pill</span>
-<h3 class="text-headline-md font-headline-md text-slate-900">Medicine Guide</h3>
+<h3 class="text-headline-md font-headline-md text-slate-900">Medical Guides</h3>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
 <!-- Pain & Fever -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4">
 <span class="w-2 h-2 rounded-full bg-green-500"></span>
 <span class="font-bold text-slate-900">Pain & Fever Relief</span>
@@ -290,7 +291,7 @@ Send Location
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 space-y-3">
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Paracetamol 500mg (Crocin)</p><p class="text-sm text-secondary">Fever, headache, body pain. Max 4g/day for adults. Take after food.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Dolo 650mg</p><p class="text-sm text-secondary">Paracetamol-based anti-pyretic. Safe for most patients. Do not combine with other Paracetamol products.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Ibuprofen 400mg (Brufen)</p><p class="text-sm text-secondary">NSAID for inflammation, muscle pain, dental pain, menstrual cramps. Always take after meals.</p></div>
@@ -300,11 +301,10 @@ Send Location
 </div>
 </div>
 </div>
-</div>
 
 <!-- Allergy & Antihistamines -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4">
 <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
 <span class="font-bold text-slate-900">Allergy & Antihistamines</span>
@@ -312,7 +312,7 @@ Send Location
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 space-y-3">
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Cetirizine 10mg (Okacet)</p><p class="text-sm text-secondary">Runny nose, hives, itching. May cause drowsiness. Take at night.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Loratadine 10mg (Claritin)</p><p class="text-sm text-secondary">Non-drowsy antihistamine for seasonal allergies. Daytime use.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Levocetirizine 5mg</p><p class="text-sm text-secondary">Stronger, non-drowsy alternative. For chronic urticaria and allergic rhinitis.</p></div>
@@ -320,11 +320,10 @@ Send Location
 </div>
 </div>
 </div>
-</div>
 
 <!-- Antibiotics -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4">
 <span class="w-2 h-2 rounded-full bg-red-500"></span>
 <span class="font-bold text-slate-900">Antibiotics</span>
@@ -332,7 +331,7 @@ Send Location
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 space-y-3">
 <div class="p-3 bg-red-50 border border-red-100 rounded-lg text-red-800 text-xs font-medium mb-2">Warning: Prescription required. Complete full course to prevent resistance.</div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Amoxicillin 500mg</p><p class="text-sm text-secondary">Broad-spectrum. Throat, ear, skin infections. 5-7 day course.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Azithromycin 500mg</p><p class="text-sm text-secondary">Respiratory and skin infections. Once daily for 3-5 days.</p></div>
@@ -342,11 +341,10 @@ Send Location
 </div>
 </div>
 </div>
-</div>
 
 <!-- Cardiac & BP -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4">
 <span class="w-2 h-2 rounded-full bg-pink-500"></span>
 <span class="font-bold text-slate-900">Cardiac & Blood Pressure</span>
@@ -354,7 +352,7 @@ Send Location
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 space-y-3">
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Amlodipine 5mg</p><p class="text-sm text-secondary">Calcium channel blocker for hypertension. Same time daily.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Telmisartan 40mg</p><p class="text-sm text-secondary">ARB for blood pressure. 24 hr coverage. Take with or without food.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Atenolol 50mg</p><p class="text-sm text-secondary">Beta-blocker for hypertension, angina, post-heart attack.</p></div>
@@ -363,11 +361,10 @@ Send Location
 </div>
 </div>
 </div>
-</div>
 
 <!-- GI & Digestive -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4">
 <span class="w-2 h-2 rounded-full bg-amber-500"></span>
 <span class="font-bold text-slate-900">GI & Digestive</span>
@@ -375,7 +372,7 @@ Send Location
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 space-y-3">
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Omeprazole 20mg</p><p class="text-sm text-secondary">Acid reflux, GERD, ulcer. Take 30 min before breakfast.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Pantoprazole 40mg</p><p class="text-sm text-secondary">Stronger acid suppression for severe GERD. Take empty stomach.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Domperidone 10mg</p><p class="text-sm text-secondary">Nausea, vomiting, bloating. Take 15 min before meals.</p></div>
@@ -384,11 +381,10 @@ Send Location
 </div>
 </div>
 </div>
-</div>
 
 <!-- Respiratory & Asthma -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4">
 <span class="w-2 h-2 rounded-full bg-sky-500"></span>
 <span class="font-bold text-slate-900">Respiratory & Asthma</span>
@@ -396,7 +392,7 @@ Send Location
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 space-y-3">
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Salbutamol Inhaler (Asthalin)</p><p class="text-sm text-secondary">Quick relief for asthma, wheezing. 2 puffs as needed.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Budesonide Inhaler</p><p class="text-sm text-secondary">Maintenance inhaler. Reduces airway inflammation. Use daily.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Montelukast 10mg</p><p class="text-sm text-secondary">Nighttime asthma control. Take before bed.</p></div>
@@ -405,11 +401,10 @@ Send Location
 </div>
 </div>
 </div>
-</div>
 
 <!-- Diabetes -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4">
 <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
 <span class="font-bold text-slate-900">Diabetes Management</span>
@@ -417,7 +412,7 @@ Send Location
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 space-y-3">
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Metformin 500mg</p><p class="text-sm text-secondary">First-line Type 2 diabetes. Take with meals to reduce GI side effects.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Glimepiride 1-2mg</p><p class="text-sm text-secondary">Stimulates insulin release. Watch for hypoglycemia (sweating, shaking).</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Glucose D Tablets</p><p class="text-sm text-secondary">For hypoglycemic episodes. 15g glucose, wait 15 min, recheck.</p></div>
@@ -426,11 +421,10 @@ Send Location
 </div>
 </div>
 </div>
-</div>
 
 <!-- Vitamins & Supplements -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4">
 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
 <span class="font-bold text-slate-900">Vitamins & Supplements</span>
@@ -438,7 +432,7 @@ Send Location
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 space-y-3">
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Multivitamin Capsule</p><p class="text-sm text-secondary">General health, immunity support. Take after breakfast daily.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Vitamin B-Complex</p><p class="text-sm text-secondary">Nerve health, energy metabolism, deficiency recovery. After meals.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Iron (Ferrous Sulfate) 200mg</p><p class="text-sm text-secondary">Anemia treatment, pregnancy. Take with Vitamin C for absorption.</p></div>
@@ -448,11 +442,10 @@ Send Location
 </div>
 </div>
 </div>
-</div>
 
 <!-- Topical & External -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4">
 <span class="w-2 h-2 rounded-full bg-violet-500"></span>
 <span class="font-bold text-slate-900">Topical & External</span>
@@ -460,7 +453,7 @@ Send Location
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 space-y-3">
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Betadine Solution</p><p class="text-sm text-secondary">Wound cleaning, pre-surgical prep. Dilute for large wounds.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Clotrimazole Cream 1%</p><p class="text-sm text-secondary">Fungal infections - ringworm, athlete's foot. Apply 2x daily for 2-4 weeks.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Silver Sulfadiazine Cream</p><p class="text-sm text-secondary">First/second-degree burns. Apply sterile dressing over cream.</p></div>
@@ -470,11 +463,10 @@ Send Location
 </div>
 </div>
 </div>
-</div>
 
 <!-- ORS & Rehydration -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4">
 <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
 <span class="font-bold text-slate-900">ORS & Rehydration</span>
@@ -482,7 +474,7 @@ Send Location
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 space-y-3">
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">ORS (Oral Rehydration Salts)</p><p class="text-sm text-secondary">Dehydration from diarrhea, heat stroke, vomiting. Dissolve in 1L clean water.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Electral Powder</p><p class="text-sm text-secondary">Electrolyte restoration. Better than plain water for dehydration recovery.</p></div>
 <div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Glucose D Powder</p><p class="text-sm text-secondary">Instant energy restoration. Mix in water. Useful for hypoglycemia.</p></div>
@@ -493,8 +485,8 @@ Send Location
 </div>
 
 <!-- Emergency Meds -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm lg:col-span-2" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm lg:col-span-2 min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4">
 <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
 <span class="font-bold text-slate-900 text-red-600">Emergency Medicines (Critical Use Only)</span>
@@ -502,7 +494,7 @@ Send Location
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100">
 <div class="p-3 bg-red-50 border border-red-100 rounded-lg text-red-800 text-sm font-medium mb-4">These medicines are for emergency situations only. Always call 108 first.</div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 <div class="p-4 bg-white rounded-lg border border-red-200"><p class="text-slate-900 font-bold mb-1">Aspirin 300mg</p><p class="text-sm text-secondary">Chew immediately in suspected heart attack (if no bleeding risk).</p></div>
@@ -517,7 +509,6 @@ Send Location
 </div>
 </div>
 
-</div>
 </section>
 
 <!-- First Aid Section -->
@@ -555,8 +546,8 @@ Send Location
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
 <!-- Heavy Bleeding -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-red-600">bloodtype</span>
 Heavy Bleeding Control
@@ -564,7 +555,7 @@ Heavy Bleeding Control
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Apply direct pressure with a clean cloth or bandage. Maintain firm pressure.</p>
 <p><strong class="text-slate-900">Step 2:</strong> If soaked through, add another layer—do NOT remove the first one.</p>
 <p><strong class="text-slate-900">Step 3:</strong> Elevate the limb above heart level if no fracture is suspected.</p>
@@ -573,11 +564,10 @@ Heavy Bleeding Control
 </div>
 </div>
 </div>
-</div>
 
 <!-- Burns -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-orange-500">whatshot</span>
 Burns Treatment
@@ -585,7 +575,7 @@ Burns Treatment
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Cool the burn under running cool (not cold) water for 10-15 minutes.</p>
 <p><strong class="text-slate-900">Step 2:</strong> Remove jewelry or tight clothing near the burn before swelling starts.</p>
 <p><strong class="text-slate-900">Step 3:</strong> Apply Silver Sulfadiazine cream. Cover with sterile non-stick dressing.</p>
@@ -594,11 +584,10 @@ Burns Treatment
 </div>
 </div>
 </div>
-</div>
 
 <!-- Choking -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-orange-500">air</span>
 Choking (Heimlich Maneuver)
@@ -606,7 +595,7 @@ Choking (Heimlich Maneuver)
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Stand behind the person and wrap arms around waist.</p>
 <p><strong class="text-slate-900">Step 2:</strong> Make a fist and place thumb side just above the navel, below ribcage.</p>
 <p><strong class="text-slate-900">Step 3:</strong> Grasp fist with other hand and perform quick upward thrusts.</p>
@@ -615,11 +604,10 @@ Choking (Heimlich Maneuver)
 </div>
 </div>
 </div>
-</div>
 
 <!-- Seizures -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-blue-500">psychology</span>
 Seizure Management
@@ -627,7 +615,7 @@ Seizure Management
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Ease the person to the floor. Turn them gently onto one side.</p>
 <p><strong class="text-slate-900">Step 2:</strong> Clear the area of hard or sharp objects. Place something soft under head.</p>
 <p><strong class="text-slate-900">Step 3:</strong> Remove glasses, loosen tight clothing around neck.</p>
@@ -636,19 +624,18 @@ Seizure Management
 </div>
 </div>
 </div>
-</div>
 
 <!-- Fracture -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
-<span class="material-symbols-outlined text-slate-600">bone</span>
+<span class="material-symbols-outlined text-slate-600">orthopedics</span>
 Fracture / Broken Bone
 </div>
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Do NOT move the injured limb. Keep it in the position found.</p>
 <p><strong class="text-slate-900">Step 2:</strong> Immobilize with a splint (wooden board, rolled newspaper, pillow).</p>
 <p><strong class="text-slate-900">Step 3:</strong> Apply ice pack wrapped in cloth for 20 minutes to reduce swelling.</p>
@@ -657,11 +644,10 @@ Fracture / Broken Bone
 </div>
 </div>
 </div>
-</div>
 
 <!-- Heat Stroke -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-yellow-600">sunny</span>
 Heat Stroke
@@ -669,7 +655,7 @@ Heat Stroke
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Move to a cool, shaded area immediately. Remove excess clothing.</p>
 <p><strong class="text-slate-900">Step 2:</strong> Apply cool water to skin. Use fans or ice packs on armpits, groin, and neck.</p>
 <p><strong class="text-slate-900">Step 3:</strong> Give small sips of water or ORS only if conscious and alert.</p>
@@ -681,16 +667,16 @@ Heat Stroke
 </div>
 
 <!-- Poisoning -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
-<span class="material-symbols-outlined text-green-600">skull</span>
+<span class="material-symbols-outlined text-green-600">warning</span>
 Poisoning Response
 </div>
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Identify what was taken and how much. Check the container.</p>
 <p><strong class="text-slate-900">Step 2:</strong> Call Poison Control or 108 immediately. Keep the bottle for paramedics.</p>
 <p><strong class="text-slate-900">Do NOT:</strong> Induce vomiting unless instructed by a professional.</p>
@@ -699,11 +685,10 @@ Poisoning Response
 </div>
 </div>
 </div>
-</div>
 
 <!-- Snake Bite -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-green-700">pest_control</span>
 Snake Bite
@@ -711,7 +696,7 @@ Snake Bite
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Keep the patient calm. Panic increases venom spread.</p>
 <p><strong class="text-slate-900">Step 2:</strong> Immobilize the bitten limb. Keep it below heart level.</p>
 <p><strong class="text-slate-900">Step 3:</strong> Remove rings, watches, tight clothing before swelling starts.</p>
@@ -720,11 +705,10 @@ Snake Bite
 </div>
 </div>
 </div>
-</div>
 
 <!-- Electric Shock -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-yellow-500">bolt</span>
 Electric Shock
@@ -732,7 +716,7 @@ Electric Shock
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Turn off the power source immediately. Do NOT touch the person directly.</p>
 <p><strong class="text-slate-900">Step 2:</strong> Use a non-conductive object (wood, plastic) to separate person from source.</p>
 <p><strong class="text-slate-900">Step 3:</strong> Check breathing and pulse. Begin CPR if not breathing.</p>
@@ -741,11 +725,10 @@ Electric Shock
 </div>
 </div>
 </div>
-</div>
 
 <!-- Drowning -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-blue-500">pool</span>
 Drowning Rescue
@@ -753,7 +736,7 @@ Drowning Rescue
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Reach, throw, row—don't go in water unless trained. Use a rope, pole, or float.</p>
 <p><strong class="text-slate-900">Step 2:</strong> Once out, check breathing. If not breathing, start CPR immediately.</p>
 <p><strong class="text-slate-900">Step 3:</strong> Give 2 rescue breaths first, then 30 compressions. Water in lungs needs oxygen.</p>
@@ -762,11 +745,10 @@ Drowning Rescue
 </div>
 </div>
 </div>
-</div>
 
 <!-- Nosebleed -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-red-400">water_drop</span>
 Nosebleed
@@ -774,7 +756,7 @@ Nosebleed
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Sit upright and lean FORWARD (not backward). Pinch soft part of nose.</p>
 <p><strong class="text-slate-900">Step 2:</strong> Hold pressure continuously for 10-15 minutes. Breathe through mouth.</p>
 <p><strong class="text-slate-900">Step 3:</strong> Apply cold compress or ice pack to bridge of nose.</p>
@@ -783,11 +765,10 @@ Nosebleed
 </div>
 </div>
 </div>
-</div>
 
 <!-- Fainting -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-slate-400">sensor_occupied</span>
 Fainting / Unconsciousness
@@ -795,7 +776,7 @@ Fainting / Unconsciousness
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Lay the person flat on their back. Elevate legs 12 inches above heart.</p>
 <p><strong class="text-slate-900">Step 2:</strong> Loosen tight clothing. Ensure fresh air circulation.</p>
 <p><strong class="text-slate-900">Step 3:</strong> If they vomit, turn them onto their side (recovery position).</p>
@@ -804,11 +785,10 @@ Fainting / Unconsciousness
 </div>
 </div>
 </div>
-</div>
 
 <!-- Eye Injury -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-cyan-500">visibility</span>
 Eye Injury
@@ -816,7 +796,7 @@ Eye Injury
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Chemical splash:</strong> Flush eye with clean water for 15 minutes. Hold eyelids open.</p>
 <p><strong class="text-slate-900">Foreign object:</strong> Do NOT rub the eye. Try flushing with saline or clean water.</p>
 <p><strong class="text-slate-900">Blunt trauma:</strong> Apply cold compress gently. Do NOT apply pressure to the eyeball.</p>
@@ -825,11 +805,10 @@ Eye Injury
 </div>
 </div>
 </div>
-</div>
 
 <!-- Animal Bite -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-amber-600">pets</span>
 Animal Bite
@@ -837,7 +816,7 @@ Animal Bite
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">Step 1:</strong> Wash the wound thoroughly with soap and running water for 10 minutes.</p>
 <p><strong class="text-slate-900">Step 2:</strong> Apply Betadine or antiseptic. Cover with clean sterile bandage.</p>
 <p><strong class="text-slate-900">Step 3:</strong> Get a Tetanus Toxoid injection within 48 hours if not up to date.</p>
@@ -849,8 +828,8 @@ Animal Bite
 </div>
 
 <!-- Sprain -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-lime-600">directions_walk</span>
 Sprain & Strain (RICE)
@@ -858,7 +837,7 @@ Sprain & Strain (RICE)
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
 </div>
 <div class="accordion-content bg-slate-50/50">
-<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 text-sm text-secondary space-y-3">
 <p><strong class="text-slate-900">R - Rest:</strong> Stop activity immediately. Do not bear weight on injured area.</p>
 <p><strong class="text-slate-900">I - Ice:</strong> Apply ice pack wrapped in cloth for 20 minutes every 2-3 hours. First 48 hours only.</p>
 <p><strong class="text-slate-900">C - Compression:</strong> Wrap with elastic bandage. Not too tight. Check circulation.</p>
@@ -869,7 +848,6 @@ Sprain & Strain (RICE)
 </div>
 </div>
 
-</div>
 </section>
 
 <!-- Emergency Scenarios Section -->
@@ -881,8 +859,8 @@ Sprain & Strain (RICE)
 <div class="grid grid-cols-1 gap-4">
 
 <!-- Fire Safety -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-orange-600">local_fire_department</span>
 Fire Safety Protocols
@@ -913,11 +891,10 @@ Fire Safety Protocols
 </div>
 </div>
 </div>
-</div>
 
 <!-- Earthquake -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-amber-800">landscape</span>
 Earthquake Response
@@ -947,11 +924,10 @@ Earthquake Response
 </div>
 </div>
 </div>
-</div>
 
 <!-- Power Outage -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-slate-600">power_off</span>
 Power Outages
@@ -980,11 +956,10 @@ Power Outages
 </div>
 </div>
 </div>
-</div>
 
 <!-- Flood -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-blue-600">water</span>
 Flood Emergency
@@ -1013,11 +988,10 @@ Flood Emergency
 </div>
 </div>
 </div>
-</div>
 
 <!-- Heart Attack -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-red-600">cardiology</span>
 Heart Attack Signs & Response
@@ -1048,11 +1022,10 @@ Heart Attack Signs & Response
 </div>
 </div>
 </div>
-</div>
 
 <!-- Stroke -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-purple-600">neurology</span>
 Stroke Recognition (FAST)
@@ -1083,11 +1056,10 @@ Stroke Recognition (FAST)
 </div>
 </div>
 </div>
-</div>
 
-<!-- Allergic Reaction (Anaphylaxis) -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<!-- Allergic Reaction -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-pink-600">allergy</span>
 Severe Allergic Reaction
@@ -1117,11 +1089,10 @@ Severe Allergic Reaction
 </div>
 </div>
 </div>
-</div>
 
 <!-- Diabetic Emergency -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-teal-600">monitor_heart</span>
 Diabetic Emergency
@@ -1150,13 +1121,12 @@ Diabetic Emergency
 </div>
 </div>
 </div>
-</div>
 
 <!-- Chemical Spill -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
-<span class="material-symbols-outlined text-yellow-700">hazard</span>
+<span class="material-symbols-outlined text-yellow-700">science</span>
 Chemical Exposure
 </div>
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
@@ -1183,11 +1153,10 @@ Chemical Exposure
 </div>
 </div>
 </div>
-</div>
 
 <!-- Carbon Monoxide -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
 <span class="material-symbols-outlined text-gray-600">co2</span>
 Carbon Monoxide Poisoning
@@ -1219,10 +1188,10 @@ Carbon Monoxide Poisoning
 </div>
 
 <!-- Panic Attack -->
-<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
-<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden min-h-accordion" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors min-h-accordion">
 <div class="flex items-center gap-4 font-bold text-slate-900">
-<span class="material-symbols-outlined text-indigo-500">mental_health</span>
+<span class="material-symbols-outlined text-indigo-500">self_improvement</span>
 Panic Attack Response
 </div>
 <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
@@ -1251,7 +1220,6 @@ Panic Attack Response
 </div>
 </div>
 
-</div>
 </section>
 
 <!-- About Section -->
@@ -1304,27 +1272,27 @@ The information provided on Emergency Desk is for informational purposes only an
 </footer>
 
 <script>
-// Accordion toggle
+// Accordion toggle - click to open, click again to close
 document.querySelectorAll('.accordion-item').forEach(function(item) {
-  item.addEventListener('click', function(e) {
-    const header = this.querySelector('.px-6.py-5');
-    if (e.target.closest('.px-6.py-5')) {
-      this.classList.toggle('active');
-    }
-  });
+  var header = item.querySelector('.px-6.py-5');
+  if (header) {
+    header.addEventListener('click', function() {
+      item.classList.toggle('active');
+    });
+  }
 });
 
 // Active nav tracking
-const sections = document.querySelectorAll('#hero, #medicine, #firstaid, #scenarios, #about');
-const navLinks = document.querySelectorAll('.nav-link');
+var sections = document.querySelectorAll('#hero, #contacts, #medicine, #firstaid, #scenarios, #about');
+var navLinks = document.querySelectorAll('.nav-link');
 
 function updateActiveNav() {
-  let current = '';
-  const scrollY = window.scrollY;
+  var current = '';
+  var scrollY = window.scrollY;
 
   sections.forEach(function(section) {
-    const sectionTop = section.offsetTop - 150;
-    const sectionHeight = section.offsetHeight;
+    var sectionTop = section.offsetTop - 150;
+    var sectionHeight = section.offsetHeight;
     if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
       current = section.getAttribute('id');
     }
@@ -1332,8 +1300,8 @@ function updateActiveNav() {
 
   navLinks.forEach(function(link) {
     link.classList.remove('active');
-    const href = link.getAttribute('href');
-    if (href === '#' + current || (current === 'hero' && href === '#hero')) {
+    var href = link.getAttribute('href');
+    if (href === '#' + current) {
       link.classList.add('active');
     }
   });
@@ -1346,15 +1314,41 @@ window.addEventListener('load', updateActiveNav);
 navLinks.forEach(function(link) {
   link.addEventListener('click', function(e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    var target = document.querySelector(this.getAttribute('href'));
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 });
 
-// Mobile nav toggle
-const mobileBtn = document.querySelector('button');
-const mobileNav = document.getElementById('mobile-nav');
+// WhatsApp Alert - opens WhatsApp with message to 9873865995
+document.getElementById('whatsapp-btn').addEventListener('click', function() {
+  var number = '919873865995';
+  var message = encodeURIComponent('Hi, I need help.');
+  window.open('https://wa.me/' + number + '?text=' + message, '_blank');
+});
+
+// Send Location - asks permission then sends location via WhatsApp
+document.getElementById('location-btn').addEventListener('click', function() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var lat = position.coords.latitude;
+      var lon = position.coords.longitude;
+      var mapsUrl = 'https://www.google.com/maps?q=' + lat + ',' + lon;
+      var number = '919873865995';
+      var message = encodeURIComponent('🚨 Emergency! My current location:\n' + mapsUrl + '\n\nPlease help me immediately.');
+      window.open('https://wa.me/' + number + '?text=' + message, '_blank');
+    }, function(error) {
+      alert('Location access denied. Please enable location permissions in your browser.');
+    });
+  } else {
+    alert('Geolocation is not supported by this browser.');
+  }
+});
+
+// SOS button - calls 112
+document.getElementById('sos-btn').addEventListener('click', function() {
+  window.location.href = 'tel:112';
+});
 </script>
 </body></html>
