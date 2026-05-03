@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Emergency Desk | Critical Response Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-primary-fixed-variant": "#930010",
+        "secondary": "#5d5e62",
+        "error": "#ba1a1a",
+        "error-container": "#ffdad6",
+        "on-tertiary-fixed-variant": "#003fa4",
+        "primary-fixed-dim": "#ffb3ac",
+        "outline-variant": "#e4beba",
+        "primary": "#af101a",
+        "surface-container": "#edeeef",
+        "surface-bright": "#f8f9fa",
+        "primary-container": "#D32F2F",
+        "on-error-container": "#93000a",
+        "surface-container-high": "#e7e8e9",
+        "background": "#f8f9fa",
+        "inverse-primary": "#ffb3ac",
+        "surface-variant": "#e1e3e4",
+        "on-secondary-fixed": "#1a1c1f",
+        "on-surface": "#191c1d",
+        "secondary-fixed-dim": "#c6c6ca",
+        "secondary-fixed": "#e2e2e6",
+        "outline": "#8f6f6c",
+        "on-background": "#191c1d",
+        "secondary-container": "#dfdfe3",
+        "on-secondary-fixed-variant": "#45474a",
+        "inverse-surface": "#2e3132",
+        "tertiary": "#004ec7",
+        "on-tertiary-container": "#f3f4ff",
+        "on-primary-fixed": "#410003",
+        "on-error": "#ffffff",
+        "primary-fixed": "#ffdad6",
+        "on-primary-container": "#fff2f0",
+        "on-surface-variant": "#5b403d",
+        "surface": "#f8f9fa",
+        "tertiary-container": "#0064fb",
+        "on-tertiary-fixed": "#001849",
+        "surface-tint": "#ba1a20",
+        "on-tertiary": "#ffffff",
+        "inverse-on-surface": "#f0f1f2",
+        "tertiary-fixed-dim": "#b3c5ff",
+        "on-secondary-container": "#616266",
+        "surface-container-lowest": "#ffffff",
+        "tertiary-fixed": "#dae1ff",
+        "surface-dim": "#d9dadb",
+        "on-primary": "#ffffff",
+        "on-secondary": "#ffffff",
+        "surface-container-highest": "#e1e3e4"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "gutter": "24px",
+        "margin-desktop": "40px",
+        "unit": "8px",
+        "margin-mobile": "16px",
+        "container-max": "1440px"
+      },
+      "fontFamily": {
+        "label-sm": ["Plus Jakarta Sans"],
+        "body-lg": ["Plus Jakarta Sans"],
+        "label-md": ["Plus Jakarta Sans"],
+        "headline-lg": ["Plus Jakarta Sans"],
+        "display-lg": ["Plus Jakarta Sans"],
+        "headline-md": ["Plus Jakarta Sans"],
+        "body-md": ["Plus Jakarta Sans"]
+      },
+      "fontSize": {
+        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+      }
+    }
+  }
+}
+</script>
+<style>
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+}
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+}
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.accordion-item:focus-within .accordion-content,
+.accordion-item.active .accordion-content {
+  max-height: 2000px;
+}
+.accordion-item:focus-within .chevron-icon,
+.accordion-item.active .chevron-icon {
+  transform: rotate(180deg);
+}
+body {
+  min-height: max(884px, 100dvh);
+  scroll-behavior: smooth;
+}
+.nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #D32F2F;
+  transition: width 0.3s ease;
+}
+.nav-link.active {
+  color: #D32F2F !important;
+  font-weight: 700 !important;
+}
+.nav-link.active::after {
+  width: 100%;
+}
+.hero-img {
+  transition: transform 0.6s ease;
+}
+.group:hover .hero-img {
+  transform: scale(1.03);
+}
+</style>
+</head>
+<body class="bg-background font-body-md text-on-background antialiased">
+
+<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)] font-['Plus_Jakarta_Sans']">
+<div class="flex items-center justify-between px-4 md:px-8 py-4 max-w-[1440px] mx-auto w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#D32F2F] text-2xl">emergency</span>
+<h1 class="text-lg md:text-xl font-extrabold tracking-tighter text-slate-900">Emergency Desk</h1>
+</div>
+<nav class="hidden md:flex gap-8">
+<a class="nav-link text-slate-500 font-medium hover:text-slate-900" href="#hero">Home</a>
+<a class="nav-link text-slate-500 font-medium hover:text-slate-900" href="#medicine">Medicine</a>
+<a class="nav-link text-slate-500 font-medium hover:text-slate-900" href="#firstaid">First Aid</a>
+<a class="nav-link text-slate-500 font-medium hover:text-slate-900" href="#scenarios">Scenarios</a>
+<a class="nav-link text-slate-500 font-medium hover:text-slate-900" href="#about">About</a>
+</nav>
+<button class="bg-[#D32F2F] text-white px-4 md:px-6 py-2 rounded-lg font-bold hover:bg-red-700 active:scale-95 transition-all flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-sm">notifications_active</span>
+SOS
+</button>
+</div>
+<div id="mobile-nav" class="hidden md:hidden px-4 pb-4 flex flex-wrap gap-3">
+<a class="nav-link text-slate-500 font-medium text-sm" href="#hero">Home</a>
+<a class="nav-link text-slate-500 font-medium text-sm" href="#medicine">Medicine</a>
+<a class="nav-link text-slate-500 font-medium text-sm" href="#firstaid">First Aid</a>
+<a class="nav-link text-slate-500 font-medium text-sm" href="#scenarios">Scenarios</a>
+<a class="nav-link text-slate-500 font-medium text-sm" href="#about">About</a>
+</div>
+</header>
+
+<main class="pt-24 pb-12 px-4 md:px-12 max-w-[1440px] mx-auto">
+
+<!-- Hero Section -->
+<section class="mb-16" id="hero">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+<div class="space-y-6">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-[#D32F2F] font-label-md text-label-md border border-red-100">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[#D32F2F]"></span>
+</span>
+System Ready: Priority Zero
+</span>
+<h2 class="text-display-lg font-display-lg tracking-tight text-slate-900 leading-tight">Immediate Medical<br/><span class="text-[#D32F2F]">Crisis Support.</span></h2>
+<p class="text-body-lg text-secondary max-w-lg">
+Rapid access to clinical guidance, emergency contacts, and life-saving protocols. Designed for speed when every second dictates the outcome.
+</p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<button class="flex-1 bg-green-600 text-white p-4 rounded-xl font-bold flex items-center justify-center gap-3 shadow-lg shadow-green-100 hover:bg-green-700 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">chat</span>
+WhatsApp Alert
+</button>
+<button class="flex-1 bg-slate-900 text-white p-4 rounded-xl font-bold flex items-center justify-center gap-3 shadow-lg shadow-slate-200 hover:bg-slate-800 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">my_location</span>
+Send Location
+</button>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-red-600 to-red-400 rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>
+<div class="relative aspect-video rounded-2xl overflow-hidden border border-slate-200 shadow-2xl">
+<img alt="Paramedics providing emergency medical care inside ambulance" class="w-full h-full object-cover hero-img" src="https://imgs.search.brave.com/6IntWVXxFP-WEk3vRn6EACYHe4keGHnBdyF5AiI4MF8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRpYS5nZXR0eWltYWdlcy5jb20vaWQvMjE1OTE2NDAwOS9waG90by9wYXJhbWVkaWNzLXByb3ZpZGluZy1lbWVyZ2VuY3ktbWVkaWNhbC1jYXJlLWluc2lkZS1hbWJ1bGFuY2UuanBnP3M9NjEyeDYxMiZ3PTAmaz0yMCZjPU90MXNaakFtWmllMGVoLV9MNTlmQUVCcUY5OEp3UW8xWTRQVU5lQ2YxNFE9"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Emergency Contacts -->
+<section class="mb-20" id="contacts">
+<div class="mb-8">
+<h3 class="text-headline-md font-headline-md text-slate-900 mb-2">Emergency Services</h3>
+<p class="text-secondary">Direct lines to national response units.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="glass-panel p-6 rounded-xl border-l-4 border-l-blue-600 hover:translate-y-[-4px] transition-all cursor-pointer group" onclick="window.location.href='tel:100'">
+<div class="flex justify-between items-start mb-4">
+<span class="p-3 bg-blue-50 text-blue-600 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">local_police</span>
+</span>
+<span class="text-2xl font-black text-slate-300">100</span>
+</div>
+<h4 class="font-bold text-slate-900 text-lg mb-1">Police</h4>
+<p class="text-sm text-secondary">Law enforcement & public safety.</p>
+</div>
+<div class="glass-panel p-6 rounded-xl border-l-4 border-l-orange-600 hover:translate-y-[-4px] transition-all cursor-pointer group" onclick="window.location.href='tel:101'">
+<div class="flex justify-between items-start mb-4">
+<span class="p-3 bg-orange-50 text-orange-600 rounded-lg group-hover:bg-orange-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">fire_truck</span>
+</span>
+<span class="text-2xl font-black text-slate-300">101</span>
+</div>
+<h4 class="font-bold text-slate-900 text-lg mb-1">Fire Brigade</h4>
+<p class="text-sm text-secondary">Fire and rescue operations.</p>
+</div>
+<div class="glass-panel p-6 rounded-xl border-l-4 border-l-[#D32F2F] hover:translate-y-[-4px] transition-all cursor-pointer group" onclick="window.location.href='tel:102'">
+<div class="flex justify-between items-start mb-4">
+<span class="p-3 bg-red-50 text-[#D32F2F] rounded-lg group-hover:bg-[#D32F2F] group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">medical_services</span>
+</span>
+<span class="text-2xl font-black text-slate-300">102</span>
+</div>
+<h4 class="font-bold text-slate-900 text-lg mb-1">Ambulance</h4>
+<p class="text-sm text-secondary">Immediate trauma response.</p>
+</div>
+<div class="glass-panel p-6 rounded-xl border-l-4 border-l-purple-600 hover:translate-y-[-4px] transition-all cursor-pointer group" onclick="window.location.href='tel:1091'">
+<div class="flex justify-between items-start mb-4">
+<span class="p-3 bg-purple-50 text-purple-600 rounded-lg group-hover:bg-purple-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">support_agent</span>
+</span>
+<span class="text-2xl font-black text-slate-300">1091</span>
+</div>
+<h4 class="font-bold text-slate-900 text-lg mb-1">Women Safety</h4>
+<p class="text-sm text-secondary">Safety & assistance helpline.</p>
+</div>
+</div>
+</section>
+
+<!-- Medicine Section -->
+<section class="mb-20" id="medicine">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-[#D32F2F] text-3xl">pill</span>
+<h3 class="text-headline-md font-headline-md text-slate-900">Medicine Guide</h3>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+<!-- Pain & Fever -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="font-bold text-slate-900">Pain & Fever Relief</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Paracetamol 500mg (Crocin)</p><p class="text-sm text-secondary">Fever, headache, body pain. Max 4g/day for adults. Take after food.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Dolo 650mg</p><p class="text-sm text-secondary">Paracetamol-based anti-pyretic. Safe for most patients. Do not combine with other Paracetamol products.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Ibuprofen 400mg (Brufen)</p><p class="text-sm text-secondary">NSAID for inflammation, muscle pain, dental pain, menstrual cramps. Always take after meals.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Diclofenac 50mg (Voveran)</p><p class="text-sm text-secondary">Severe pain, joint pain, arthritis, sprains. Take after food. Not for prolonged use.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Aspirin 75mg / 300mg</p><p class="text-sm text-secondary">75mg daily for heart protection. 300mg chewable in suspected heart attack emergency.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Combiflam (Ibuprofen + Paracetamol)</p><p class="text-sm text-secondary">Strong pain relief combo. Not for long-term use. Max 3 tablets/day.</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Allergy & Antihistamines -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-2 h-2 rounded-full bg-yellow-500"></span>
+<span class="font-bold text-slate-900">Allergy & Antihistamines</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Cetirizine 10mg (Okacet)</p><p class="text-sm text-secondary">Runny nose, hives, itching. May cause drowsiness. Take at night.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Loratadine 10mg (Claritin)</p><p class="text-sm text-secondary">Non-drowsy antihistamine for seasonal allergies. Daytime use.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Levocetirizine 5mg</p><p class="text-sm text-secondary">Stronger, non-drowsy alternative. For chronic urticaria and allergic rhinitis.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Hydrocortisone Cream 1%</p><p class="text-sm text-secondary">Topical for skin allergies, insect bites, rashes. Apply 2-3 times daily.</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Antibiotics -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-2 h-2 rounded-full bg-red-500"></span>
+<span class="font-bold text-slate-900">Antibiotics</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="p-3 bg-red-50 border border-red-100 rounded-lg text-red-800 text-xs font-medium mb-2">Warning: Prescription required. Complete full course to prevent resistance.</div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Amoxicillin 500mg</p><p class="text-sm text-secondary">Broad-spectrum. Throat, ear, skin infections. 5-7 day course.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Azithromycin 500mg</p><p class="text-sm text-secondary">Respiratory and skin infections. Once daily for 3-5 days.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Ciprofloxacin 500mg</p><p class="text-sm text-secondary">UTI, GI infections, respiratory. Empty stomach. Avoid dairy.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Metronidazole 400mg</p><p class="text-sm text-secondary">Dental infections, amoebic dysentery. Strictly avoid alcohol.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Doxycycline 100mg</p><p class="text-sm text-secondary">Broad-spectrum, malaria prophylaxis, acne. Avoid sun exposure. Not for children under 8.</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Cardiac & BP -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-2 h-2 rounded-full bg-pink-500"></span>
+<span class="font-bold text-slate-900">Cardiac & Blood Pressure</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Amlodipine 5mg</p><p class="text-sm text-secondary">Calcium channel blocker for hypertension. Same time daily.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Telmisartan 40mg</p><p class="text-sm text-secondary">ARB for blood pressure. 24 hr coverage. Take with or without food.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Atenolol 50mg</p><p class="text-sm text-secondary">Beta-blocker for hypertension, angina, post-heart attack.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Nitroglycerin 2.6mg (Sorbitrate)</p><p class="text-sm text-secondary">Sublingual for chest pain. Keep under tongue. Repeat after 5 min if needed.</p></div>
+<div class="p-3 bg-red-50 border border-red-100 rounded-lg text-red-800 text-xs font-medium">Emergency: Chest pain + sweating + left arm pain = Call 108 immediately.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- GI & Digestive -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span class="font-bold text-slate-900">GI & Digestive</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Omeprazole 20mg</p><p class="text-sm text-secondary">Acid reflux, GERD, ulcer. Take 30 min before breakfast.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Pantoprazole 40mg</p><p class="text-sm text-secondary">Stronger acid suppression for severe GERD. Take empty stomach.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Domperidone 10mg</p><p class="text-sm text-secondary">Nausea, vomiting, bloating. Take 15 min before meals.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Ondansetron 4mg</p><p class="text-sm text-secondary">Severe nausea/vomiting. Motion sickness, post-surgical nausea.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Loperamide 2mg</p><p class="text-sm text-secondary">Acute diarrhea control. Stay hydrated with ORS alongside.</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Respiratory & Asthma -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-2 h-2 rounded-full bg-sky-500"></span>
+<span class="font-bold text-slate-900">Respiratory & Asthma</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Salbutamol Inhaler (Asthalin)</p><p class="text-sm text-secondary">Quick relief for asthma, wheezing. 2 puffs as needed.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Budesonide Inhaler</p><p class="text-sm text-secondary">Maintenance inhaler. Reduces airway inflammation. Use daily.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Montelukast 10mg</p><p class="text-sm text-secondary">Nighttime asthma control. Take before bed.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Dextromethorphan Syrup</p><p class="text-sm text-secondary">Dry cough suppressant. Not for productive cough.</p></div>
+<div class="p-3 bg-red-50 border border-red-100 rounded-lg text-red-800 text-xs font-medium">Breathing difficulty persists after inhaler = Call emergency immediately.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Diabetes -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+<span class="font-bold text-slate-900">Diabetes Management</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Metformin 500mg</p><p class="text-sm text-secondary">First-line Type 2 diabetes. Take with meals to reduce GI side effects.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Glimepiride 1-2mg</p><p class="text-sm text-secondary">Stimulates insulin release. Watch for hypoglycemia (sweating, shaking).</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Glucose D Tablets</p><p class="text-sm text-secondary">For hypoglycemic episodes. 15g glucose, wait 15 min, recheck.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Normal Blood Sugar Range</p><p class="text-sm text-secondary">Fasting: 70-100 mg/dL. Post-meal: under 140 mg/dL. Below 70 = Hypoglycemia.</p></div>
+<div class="p-3 bg-red-50 border border-red-100 rounded-lg text-red-800 text-xs font-medium">Unconsciousness + diabetes history = Apply glucose gel, call 108.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Vitamins & Supplements -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-bold text-slate-900">Vitamins & Supplements</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Multivitamin Capsule</p><p class="text-sm text-secondary">General health, immunity support. Take after breakfast daily.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Vitamin B-Complex</p><p class="text-sm text-secondary">Nerve health, energy metabolism, deficiency recovery. After meals.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Iron (Ferrous Sulfate) 200mg</p><p class="text-sm text-secondary">Anemia treatment, pregnancy. Take with Vitamin C for absorption.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Calcium + Vitamin D3</p><p class="text-sm text-secondary">Bone health, fracture recovery, osteoporosis prevention. After food.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Vitamin C 500mg</p><p class="text-sm text-secondary">Immunity boost, wound healing, iron absorption aid.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Zinc 20mg</p><p class="text-sm text-secondary">Immunity, wound healing, cold recovery. Take with food.</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Topical & External -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-2 h-2 rounded-full bg-violet-500"></span>
+<span class="font-bold text-slate-900">Topical & External</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Betadine Solution</p><p class="text-sm text-secondary">Wound cleaning, pre-surgical prep. Dilute for large wounds.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Clotrimazole Cream 1%</p><p class="text-sm text-secondary">Fungal infections - ringworm, athlete's foot. Apply 2x daily for 2-4 weeks.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Silver Sulfadiazine Cream</p><p class="text-sm text-secondary">First/second-degree burns. Apply sterile dressing over cream.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Moov / Volini Gel</p><p class="text-sm text-secondary">Muscle pain, sprains, joint pain. Massage gently 2-3 times daily.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Boroline Cream</p><p class="text-sm text-secondary">Dry skin, cracked heels, minor cuts. Antiseptic and moisturizing.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Povidone-Iodine Ointment</p><p class="text-sm text-secondary">Antiseptic for cuts, wounds, minor burns. Apply thin layer.</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ORS & Rehydration -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+<span class="font-bold text-slate-900">ORS & Rehydration</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3">
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">ORS (Oral Rehydration Salts)</p><p class="text-sm text-secondary">Dehydration from diarrhea, heat stroke, vomiting. Dissolve in 1L clean water.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Electral Powder</p><p class="text-sm text-secondary">Electrolyte restoration. Better than plain water for dehydration recovery.</p></div>
+<div class="p-4 bg-white rounded-lg border border-slate-200"><p class="text-slate-900 font-bold mb-1">Glucose D Powder</p><p class="text-sm text-secondary">Instant energy restoration. Mix in water. Useful for hypoglycemia.</p></div>
+<div class="p-3 bg-red-50 border border-red-100 rounded-lg text-red-800 text-xs font-medium">Severe dehydration signs: dry mouth, no urine for 8hrs, sunken eyes = Call 108.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Emergency Meds -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm lg:col-span-2" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+<span class="font-bold text-slate-900 text-red-600">Emergency Medicines (Critical Use Only)</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100">
+<div class="p-3 bg-red-50 border border-red-100 rounded-lg text-red-800 text-sm font-medium mb-4">These medicines are for emergency situations only. Always call 108 first.</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="p-4 bg-white rounded-lg border border-red-200"><p class="text-slate-900 font-bold mb-1">Aspirin 300mg</p><p class="text-sm text-secondary">Chew immediately in suspected heart attack (if no bleeding risk).</p></div>
+<div class="p-4 bg-white rounded-lg border border-red-200"><p class="text-slate-900 font-bold mb-1">Nitroglycerin 2.6mg</p><p class="text-sm text-secondary">Sublingual for chest pain. Keep under tongue. Call 108.</p></div>
+<div class="p-4 bg-white rounded-lg border border-red-200"><p class="text-slate-900 font-bold mb-1">Glucose D / Sugar</p><p class="text-sm text-secondary">For hypoglycemic unconsciousness. Apply on gums or under tongue.</p></div>
+<div class="p-4 bg-white rounded-lg border border-red-200"><p class="text-slate-900 font-bold mb-1">Activated Charcoal</p><p class="text-sm text-secondary">Poisoning/overdose first aid. Absorbs toxins in stomach. Call 108 first.</p></div>
+<div class="p-4 bg-white rounded-lg border border-red-200"><p class="text-slate-900 font-bold mb-1">Epinephrine Auto-Injector</p><p class="text-sm text-secondary">Anaphylaxis. Inject into outer thigh. Call 108. Keep patient legs elevated.</p></div>
+<div class="p-4 bg-white rounded-lg border border-red-200"><p class="text-slate-900 font-bold mb-1">Tetanus Toxoid Injection</p><p class="text-sm text-secondary">After any deep wound, bite, or dirty injury. Get within 48 hours.</p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- First Aid Section -->
+<section class="mb-20" id="firstaid">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-[#D32F2F] text-3xl">medical_information</span>
+<h3 class="text-headline-md font-headline-md text-slate-900">First Aid Protocols</h3>
+</div>
+
+<!-- CPR Highlight -->
+<div class="bg-slate-900 text-white rounded-2xl p-8 relative overflow-hidden group mb-8">
+<div class="relative z-10">
+<div class="inline-block px-3 py-1 rounded bg-red-600 text-[10px] font-bold uppercase mb-4 tracking-widest">Priority Alpha</div>
+<h4 class="text-3xl font-bold mb-4">CPR (Cardiopulmonary Resuscitation)</h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+<div class="space-y-2">
+<span class="text-red-500 font-bold text-lg">01. Check</span>
+<p class="text-sm text-slate-400">Ensure the area is safe. Tap shoulder and shout to check for response. Check breathing.</p>
+</div>
+<div class="space-y-2">
+<span class="text-red-500 font-bold text-lg">02. Call</span>
+<p class="text-sm text-slate-400">Dial 102 immediately. Ask someone to find an AED if available. Put phone on speaker.</p>
+</div>
+<div class="space-y-2">
+<span class="text-red-500 font-bold text-lg">03. Compress</span>
+<p class="text-sm text-slate-400">Push hard and fast in center of chest (100-120 bpm) at 2 inches depth. 30 compressions, 2 breaths.</p>
+</div>
+</div>
+<p class="text-xs text-slate-500">Continue until paramedics arrive or the person shows signs of life.</p>
+</div>
+<span class="material-symbols-outlined absolute -bottom-10 -right-10 text-[200px] text-white opacity-5 select-none">favorite</span>
+</div>
+
+<!-- First Aid Accordion -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+<!-- Heavy Bleeding -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-red-600">bloodtype</span>
+Heavy Bleeding Control
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Apply direct pressure with a clean cloth or bandage. Maintain firm pressure.</p>
+<p><strong class="text-slate-900">Step 2:</strong> If soaked through, add another layer—do NOT remove the first one.</p>
+<p><strong class="text-slate-900">Step 3:</strong> Elevate the limb above heart level if no fracture is suspected.</p>
+<p><strong class="text-slate-900">Tourniquet:</strong> Use only as a last resort for life-threatening limb bleeding. Note the time applied.</p>
+<p><strong class="text-slate-900">Call 108</strong> if bleeding doesn't stop within 10 minutes.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Burns -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-orange-500">whatshot</span>
+Burns Treatment
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Cool the burn under running cool (not cold) water for 10-15 minutes.</p>
+<p><strong class="text-slate-900">Step 2:</strong> Remove jewelry or tight clothing near the burn before swelling starts.</p>
+<p><strong class="text-slate-900">Step 3:</strong> Apply Silver Sulfadiazine cream. Cover with sterile non-stick dressing.</p>
+<p><strong class="text-slate-900">Avoid:</strong> Ice directly, butter, toothpaste, or bursting blisters.</p>
+<p><strong class="text-slate-900">Emergency:</strong> Burns larger than palm, on face/hands/joints, or chemical/electrical burns = Call 108.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Choking -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-orange-500">air</span>
+Choking (Heimlich Maneuver)
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Stand behind the person and wrap arms around waist.</p>
+<p><strong class="text-slate-900">Step 2:</strong> Make a fist and place thumb side just above the navel, below ribcage.</p>
+<p><strong class="text-slate-900">Step 3:</strong> Grasp fist with other hand and perform quick upward thrusts.</p>
+<p><strong class="text-slate-900">Step 4:</strong> Repeat until object is expelled or person becomes unconscious.</p>
+<p><strong class="text-slate-900">If unconscious:</strong> Lower to ground, call 108, begin CPR immediately.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Seizures -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-blue-500">psychology</span>
+Seizure Management
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Ease the person to the floor. Turn them gently onto one side.</p>
+<p><strong class="text-slate-900">Step 2:</strong> Clear the area of hard or sharp objects. Place something soft under head.</p>
+<p><strong class="text-slate-900">Step 3:</strong> Remove glasses, loosen tight clothing around neck.</p>
+<p><strong class="text-slate-900">Critical:</strong> Do NOT put anything in their mouth. Do NOT restrain movements.</p>
+<p><strong class="text-slate-900">Call 108</strong> if seizure lasts more than 5 minutes or repeats without recovery.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Fracture -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-slate-600">bone</span>
+Fracture / Broken Bone
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Do NOT move the injured limb. Keep it in the position found.</p>
+<p><strong class="text-slate-900">Step 2:</strong> Immobilize with a splint (wooden board, rolled newspaper, pillow).</p>
+<p><strong class="text-slate-900">Step 3:</strong> Apply ice pack wrapped in cloth for 20 minutes to reduce swelling.</p>
+<p><strong class="text-slate-900">Open Fracture:</strong> Cover wound with clean cloth. Do NOT push bone back in.</p>
+<p><strong class="text-slate-900">Call 108</strong> for spine, hip, or skull suspected fractures. Do not move patient.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Heat Stroke -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-yellow-600">sunny</span>
+Heat Stroke
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Move to a cool, shaded area immediately. Remove excess clothing.</p>
+<p><strong class="text-slate-900">Step 2:</strong> Apply cool water to skin. Use fans or ice packs on armpits, groin, and neck.</p>
+<p><strong class="text-slate-900">Step 3:</strong> Give small sips of water or ORS only if conscious and alert.</p>
+<p><strong class="text-slate-900">Signs:</strong> Hot dry skin, confusion, rapid pulse, temperature above 103°F.</p>
+<p><strong class="text-slate-900">Call 108</strong> if person is unconscious, confused, or vomiting.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Poisoning -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-green-600">skull</span>
+Poisoning Response
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Identify what was taken and how much. Check the container.</p>
+<p><strong class="text-slate-900">Step 2:</strong> Call Poison Control or 108 immediately. Keep the bottle for paramedics.</p>
+<p><strong class="text-slate-900">Do NOT:</strong> Induce vomiting unless instructed by a professional.</p>
+<p><strong class="text-slate-900">If unconscious:</strong> Place in recovery position (on side). Monitor breathing.</p>
+<p><strong class="text-slate-900">Activated Charcoal:</strong> Can be given if available. Absorbs toxins in stomach.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Snake Bite -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-green-700">pest_control</span>
+Snake Bite
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Keep the patient calm. Panic increases venom spread.</p>
+<p><strong class="text-slate-900">Step 2:</strong> Immobilize the bitten limb. Keep it below heart level.</p>
+<p><strong class="text-slate-900">Step 3:</strong> Remove rings, watches, tight clothing before swelling starts.</p>
+<p><strong class="text-slate-900">Avoid:</strong> Cutting the wound, sucking venom, applying ice, or tourniquet.</p>
+<p><strong class="text-slate-900">Call 108</strong> immediately. Note the snake's appearance if possible.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Electric Shock -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-yellow-500">bolt</span>
+Electric Shock
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Turn off the power source immediately. Do NOT touch the person directly.</p>
+<p><strong class="text-slate-900">Step 2:</strong> Use a non-conductive object (wood, plastic) to separate person from source.</p>
+<p><strong class="text-slate-900">Step 3:</strong> Check breathing and pulse. Begin CPR if not breathing.</p>
+<p><strong class="text-slate-900">Step 4:</strong> Cover burns with sterile non-stick dressing. Do NOT apply ointment.</p>
+<p><strong class="text-slate-900">Call 108</strong> for any electric shock injury. Internal damage may not be visible.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Drowning -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-blue-500">pool</span>
+Drowning Rescue
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Reach, throw, row—don't go in water unless trained. Use a rope, pole, or float.</p>
+<p><strong class="text-slate-900">Step 2:</strong> Once out, check breathing. If not breathing, start CPR immediately.</p>
+<p><strong class="text-slate-900">Step 3:</strong> Give 2 rescue breaths first, then 30 compressions. Water in lungs needs oxygen.</p>
+<p><strong class="text-slate-900">Step 4:</strong> If vomiting, turn head to side. Clear airway. Continue CPR.</p>
+<p><strong class="text-slate-900">Call 108</strong> even if person seems fine. Secondary drowning can occur hours later.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Nosebleed -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-red-400">water_drop</span>
+Nosebleed
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Sit upright and lean FORWARD (not backward). Pinch soft part of nose.</p>
+<p><strong class="text-slate-900">Step 2:</strong> Hold pressure continuously for 10-15 minutes. Breathe through mouth.</p>
+<p><strong class="text-slate-900">Step 3:</strong> Apply cold compress or ice pack to bridge of nose.</p>
+<p><strong class="text-slate-900">Avoid:</strong> Tilting head back, stuffing tissue in nose, or lying down.</p>
+<p><strong class="text-slate-900">Call 108</strong> if bleeding lasts over 20 minutes or is from head injury.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Fainting -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-slate-400">sensor_occupied</span>
+Fainting / Unconsciousness
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Lay the person flat on their back. Elevate legs 12 inches above heart.</p>
+<p><strong class="text-slate-900">Step 2:</strong> Loosen tight clothing. Ensure fresh air circulation.</p>
+<p><strong class="text-slate-900">Step 3:</strong> If they vomit, turn them onto their side (recovery position).</p>
+<p><strong class="text-slate-900">Step 4:</strong> Do NOT give food or water until fully conscious and alert.</p>
+<p><strong class="text-slate-900">Call 108</strong> if they don't regain consciousness within 1 minute or if breathing is abnormal.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Eye Injury -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-cyan-500">visibility</span>
+Eye Injury
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Chemical splash:</strong> Flush eye with clean water for 15 minutes. Hold eyelids open.</p>
+<p><strong class="text-slate-900">Foreign object:</strong> Do NOT rub the eye. Try flushing with saline or clean water.</p>
+<p><strong class="text-slate-900">Blunt trauma:</strong> Apply cold compress gently. Do NOT apply pressure to the eyeball.</p>
+<p><strong class="text-slate-900">Penetrating injury:</strong> Do NOT remove the object. Stabilize with a cup over the eye.</p>
+<p><strong class="text-slate-900">Call 108</strong> for any chemical exposure, penetrating injury, or sudden vision loss.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Animal Bite -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-amber-600">pets</span>
+Animal Bite
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">Step 1:</strong> Wash the wound thoroughly with soap and running water for 10 minutes.</p>
+<p><strong class="text-slate-900">Step 2:</strong> Apply Betadine or antiseptic. Cover with clean sterile bandage.</p>
+<p><strong class="text-slate-900">Step 3:</strong> Get a Tetanus Toxoid injection within 48 hours if not up to date.</p>
+<p><strong class="text-slate-900">Rabies risk:</strong> For any dog/cat/wildlife bite, start rabies vaccine series immediately.</p>
+<p><strong class="text-slate-900">Call 108</strong> if bite is deep, bleeding heavily, on face/hands, or from unknown animal.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Sprain -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-lime-600">directions_walk</span>
+Sprain & Strain (RICE)
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-2 border-t border-slate-100 text-sm text-secondary space-y-3">
+<p><strong class="text-slate-900">R - Rest:</strong> Stop activity immediately. Do not bear weight on injured area.</p>
+<p><strong class="text-slate-900">I - Ice:</strong> Apply ice pack wrapped in cloth for 20 minutes every 2-3 hours. First 48 hours only.</p>
+<p><strong class="text-slate-900">C - Compression:</strong> Wrap with elastic bandage. Not too tight. Check circulation.</p>
+<p><strong class="text-slate-900">E - Elevation:</strong> Raise injured limb above heart level to reduce swelling.</p>
+<p><strong class="text-slate-900">Pain relief:</strong> Ibuprofen 400mg after food. After 48 hours, switch to warm compress.</p>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- Emergency Scenarios Section -->
+<section class="mb-20" id="scenarios">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-[#D32F2F] text-3xl">gpp_maybe</span>
+<h3 class="text-headline-md font-headline-md text-slate-900">Emergency Scenarios</h3>
+</div>
+<div class="grid grid-cols-1 gap-4">
+
+<!-- Fire Safety -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-orange-600">local_fire_department</span>
+Fire Safety Protocols
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<h5 class="font-bold text-green-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">check_circle</span> DO THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Stay low to the floor to avoid smoke inhalation.</li>
+<li>Touch doors with the back of your hand before opening.</li>
+<li>Use stairs, never the elevator.</li>
+<li>Stop, Drop, and Roll if your clothes catch fire.</li>
+<li>Call 101 from a safe location outside the building.</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="font-bold text-red-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">cancel</span> AVOID THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Don't hide in closets or under beds.</li>
+<li>Don't go back for belongings once outside.</li>
+<li>Don't open a door that feels hot to the touch.</li>
+<li>Don't use water on electrical or grease fires.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Earthquake -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-amber-800">landscape</span>
+Earthquake Response
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<h5 class="font-bold text-green-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">check_circle</span> DO THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Drop, Cover, and Hold On under sturdy furniture.</li>
+<li>Move away from glass, windows, and exterior walls.</li>
+<li>If outside, move to an open area away from buildings/wires.</li>
+<li>Check for gas leaks and turn off main valve if you smell gas.</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="font-bold text-red-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">cancel</span> AVOID THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Don't run outside while the ground is still shaking.</li>
+<li>Don't stand in a doorway; it's not the safest spot.</li>
+<li>Don't use elevators after an earthquake.</li>
+<li>Don't light matches—there may be gas leaks.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Power Outage -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-slate-600">power_off</span>
+Power Outages
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<h5 class="font-bold text-green-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">check_circle</span> DO THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Keep refrigerator and freezer doors closed.</li>
+<li>Unplug sensitive electronics to avoid surge damage.</li>
+<li>Use flashlights instead of candles to prevent fire risk.</li>
+<li>Check on elderly neighbors and those on medical equipment.</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="font-bold text-red-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">cancel</span> AVOID THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Don't use a charcoal grill or gas oven indoors for heat.</li>
+<li>Don't open the freezer more than necessary.</li>
+<li>Don't touch downed power lines—call 1912 immediately.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Flood -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-blue-600">water</span>
+Flood Emergency
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<h5 class="font-bold text-green-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">check_circle</span> DO THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Move to higher ground immediately. Do not wait.</li>
+<li>Turn off electricity, gas, and water mains if safe.</li>
+<li>Keep important documents in waterproof bags.</li>
+<li>Boil all drinking water or use bottled water only.</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="font-bold text-red-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">cancel</span> AVOID THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Don't walk through moving water—6 inches can knock you down.</li>
+<li>Don't drive through flooded roads. Turn around, don't drown.</li>
+<li>Don't touch electrical equipment if wet.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Heart Attack -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-red-600">cardiology</span>
+Heart Attack Signs & Response
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<h5 class="font-bold text-green-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">check_circle</span> DO THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Call 108 immediately. Every minute counts.</li>
+<li>Chew 300mg Aspirin if available and no allergy.</li>
+<li>Keep the person sitting in a comfortable position.</li>
+<li>Loosen tight clothing. Stay calm and reassure them.</li>
+<li>Be ready to perform CPR if they become unconscious.</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="font-bold text-red-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">cancel</span> AVOID THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Don't let the person deny symptoms or refuse help.</li>
+<li>Don't give them food or drink (except Aspirin).</li>
+<li>Don't drive them yourself—wait for paramedics.</li>
+<li>Don't leave them alone even for a moment.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Stroke -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-purple-600">neurology</span>
+Stroke Recognition (FAST)
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<h5 class="font-bold text-green-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">check_circle</span> F.A.S.T. Check</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li><strong>F</strong>ace: Ask them to smile. Does one side droop?</li>
+<li><strong>A</strong>rms: Ask them to raise both. Does one drift down?</li>
+<li><strong>S</strong>peech: Ask them to repeat a phrase. Is it slurred?</li>
+<li><strong>T</strong>ime: If any sign is present, call 108 immediately.</li>
+<li>Note the exact time symptoms started.</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="font-bold text-red-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">cancel</span> AVOID THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Don't wait to see if symptoms go away.</li>
+<li>Don't give them food, drink, or medication.</li>
+<li>Don't let them drive themselves to hospital.</li>
+<li>Don't ignore symptoms because they seem mild.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Allergic Reaction (Anaphylaxis) -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-pink-600">allergy</span>
+Severe Allergic Reaction
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<h5 class="font-bold text-green-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">check_circle</span> DO THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Call 108 immediately. Anaphylaxis can be fatal in minutes.</li>
+<li>Use Epinephrine auto-injector if available (outer thigh).</li>
+<li>Lay person flat with legs elevated.</li>
+<li>If vomiting or having trouble breathing, turn to side.</li>
+<li>Remove the allergen (stinger, food, medication) if possible.</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="font-bold text-red-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">cancel</span> AVOID THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Don't wait to see if it gets better—it won't without treatment.</li>
+<li>Don't give oral medications if they have trouble swallowing.</li>
+<li>Don't let them sit up or stand if feeling faint.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Diabetic Emergency -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-teal-600">monitor_heart</span>
+Diabetic Emergency
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<h5 class="font-bold text-green-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">check_circle</span> DO THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>If conscious and able to swallow, give fast-acting sugar (juice, candy, glucose gel).</li>
+<li>Recheck after 15 minutes. Repeat if still low.</li>
+<li>If unconscious, apply glucose gel to gums. Do NOT pour liquid.</li>
+<li>Call 108 if person does not improve or loses consciousness.</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="font-bold text-red-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">cancel</span> AVOID THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Don't give food or drink to an unconscious person.</li>
+<li>Don't give insulin—that could make it worse.</li>
+<li>Don't leave them alone during an episode.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Chemical Spill -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-yellow-700">hazard</span>
+Chemical Exposure
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<h5 class="font-bold text-green-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">check_circle</span> DO THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Move away from the source immediately. Get to fresh air.</li>
+<li>Remove contaminated clothing. Flush skin with water for 15 minutes.</li>
+<li>For eye exposure: flush with clean water for 15 minutes, hold eyelids open.</li>
+<li>Call 108. Bring the chemical container or SDS sheet.</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="font-bold text-red-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">cancel</span> AVOID THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Don't try to clean up a large chemical spill yourself.</li>
+<li>Don't mix chemicals to neutralize them.</li>
+<li>Don't breathe in fumes or vapors.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Carbon Monoxide -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-gray-600">co2</span>
+Carbon Monoxide Poisoning
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<h5 class="font-bold text-green-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">check_circle</span> DO THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Get everyone outside immediately into fresh air.</li>
+<li>Call 108 and the gas company from outside.</li>
+<li>Do NOT re-enter until professionals clear the building.</li>
+<li>Watch for headache, dizziness, nausea, confusion—classic CO signs.</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="font-bold text-red-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">cancel</span> AVOID THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Don't stay inside to "figure out" the source.</li>
+<li>Don't use generators, grills, or heaters indoors.</li>
+<li>Don't ignore CO detector alarms.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Panic Attack -->
+<div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden" tabindex="0">
+<div class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4 font-bold text-slate-900">
+<span class="material-symbols-outlined text-indigo-500">mental_health</span>
+Panic Attack Response
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron-icon">expand_more</span>
+</div>
+<div class="accordion-content bg-slate-50/50">
+<div class="px-6 pb-6 pt-4 border-t border-slate-100 grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<h5 class="font-bold text-green-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">check_circle</span> DO THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Stay with the person. Speak calmly and reassuringly.</li>
+<li>Guide them through slow breathing: 4 counts in, hold 4, out 6.</li>
+<li>Move to a quiet, calm environment if possible.</li>
+<li>Remind them the feeling will pass. It's temporary.</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="font-bold text-red-700 flex items-center gap-2"><span class="material-symbols-outlined text-sm">cancel</span> AVOID THIS</h5>
+<ul class="text-sm text-secondary list-disc pl-5 space-y-1">
+<li>Don't dismiss their feelings or tell them to "just calm down."</li>
+<li>Don't crowd them or create more stimulation.</li>
+<li>Don't leave them alone if they're severely distressed.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- About Section -->
+<section class="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm mb-16" id="about">
+<div class="max-w-3xl mx-auto text-center space-y-6">
+<div class="inline-flex p-4 rounded-2xl bg-red-50 text-[#D32F2F] mb-4">
+<span class="material-symbols-outlined text-4xl">history_edu</span>
+</div>
+<h3 class="text-headline-lg font-headline-lg text-slate-900">Our Mission</h3>
+<p class="text-body-lg text-secondary leading-relaxed">
+Emergency Desk was conceived as a digital failsafe—a high-performance interface that bridges the gap between chaos and clarity during medical emergencies. Our objective is to provide professional-grade technical resources to everyone, ensuring that life-critical information is never more than a tap away.
+</p>
+<div class="pt-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-24">
+<div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Lead Developer</p>
+<p class="text-slate-900 font-bold text-lg">Madhav</p>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Architecture</p>
+<p class="text-slate-900 font-bold text-lg">Abhishek</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer class="w-full border-t border-slate-200 bg-slate-50 font-['Plus_Jakarta_Sans'] text-sm tracking-wide">
+<div class="flex flex-col md:flex-row justify-between items-center px-4 md:px-12 py-10 max-w-[1440px] mx-auto">
+<div class="mb-6 md:mb-0">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-[#D32F2F] text-xl">emergency</span>
+<span class="font-bold text-slate-900">Emergency Desk</span>
+</div>
+<p class="text-slate-500">2024 Emergency Desk. Developed by Madhav & Abhishek.</p>
+</div>
+<div class="flex gap-8 flex-wrap justify-center">
+<a class="text-slate-500 hover:text-[#D32F2F] transition-colors font-medium" href="#medicine">Medicine</a>
+<a class="text-slate-500 hover:text-[#D32F2F] transition-colors font-medium" href="#firstaid">First Aid</a>
+<a class="text-slate-500 hover:text-[#D32F2F] transition-colors font-medium" href="#scenarios">Scenarios</a>
+<a class="text-slate-500 hover:text-[#D32F2F] transition-colors font-medium" href="#about">About</a>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto px-4 md:px-12 pb-10">
+<div class="p-6 bg-white rounded-xl border border-slate-200 text-xs text-slate-400 leading-relaxed">
+<strong class="text-slate-600 block mb-1">MEDICAL DISCLAIMER:</strong>
+The information provided on Emergency Desk is for informational purposes only and is not intended as a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
+</div>
+</div>
+</footer>
+
+<script>
+// Accordion toggle
+document.querySelectorAll('.accordion-item').forEach(function(item) {
+  item.addEventListener('click', function(e) {
+    const header = this.querySelector('.px-6.py-5');
+    if (e.target.closest('.px-6.py-5')) {
+      this.classList.toggle('active');
+    }
+  });
+});
+
+// Active nav tracking
+const sections = document.querySelectorAll('#hero, #medicine, #firstaid, #scenarios, #about');
+const navLinks = document.querySelectorAll('.nav-link');
+
+function updateActiveNav() {
+  let current = '';
+  const scrollY = window.scrollY;
+
+  sections.forEach(function(section) {
+    const sectionTop = section.offsetTop - 150;
+    const sectionHeight = section.offsetHeight;
+    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(function(link) {
+    link.classList.remove('active');
+    const href = link.getAttribute('href');
+    if (href === '#' + current || (current === 'hero' && href === '#hero')) {
+      link.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', updateActiveNav);
+window.addEventListener('load', updateActiveNav);
+
+// Smooth scroll for nav links
+navLinks.forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Mobile nav toggle
+const mobileBtn = document.querySelector('button');
+const mobileNav = document.getElementById('mobile-nav');
+</script>
+</body></html>
